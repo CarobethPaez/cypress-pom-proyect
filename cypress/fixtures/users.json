@@ -1,0 +1,26 @@
+
+
+{
+  "validUser": {
+    "username": "standard_user",
+    "password": "secret_sauce",
+    "description": "Usuario estándar con acceso completo"
+  },
+  "lockedUser": {
+    "username": "locked_out_user",
+    "password": "secret_sauce",
+    "description": "Usuario bloqueado — para testear caso de error"
+  },
+  "problemUser": {
+    "username": "problem_user",
+    "password": "secret_sauce",
+    "description": "Usuario con bugs intencionales en la UI"
+  },
+  "invalidUser": {
+    "username": "usuario_falso",
+    "password": "password_falso",
+    "description": "Usuario que no existe — para testear error de login"
+  }
+}
+
+
