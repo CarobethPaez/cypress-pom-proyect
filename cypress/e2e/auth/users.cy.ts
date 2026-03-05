@@ -22,13 +22,9 @@ describe('Login parametrizado con todos los usuarios', () => {
           loginPage.verifyErrorMessage('Username and password do not match any user in this service')
         } else {
   // Caso no esperado — falla el test con un mensaje claro
-  throw new Error(`Usuario no reconocido en el fixture: ${key}`)
+  throw new Error(`User unknown in fixture: ${key}`)
 }
-    
-
-        
-
-      })
+    })
     })
   })
 
