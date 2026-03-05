@@ -18,8 +18,17 @@ describe('Cart Functionality', () => {
     inventoryPage.addProductToCart(productName1)
     inventoryPage.addProductToCart(productName2)
     
-    // Verify product is in cart
-    cartPage.verifyPageIsLoaded()
+    // Verificar que el badge del carrito muestra "2"
+  inventoryPage.verifyCartCount(2)
+
+  // Navegar al carrito
+  inventoryPage.goToCart()
+
+  // Verificar que estamos en la página del carrito
+  cartPage.verifyPageIsLoaded()
+
+  // Verificar que los 2 productos están en el carrito
+  cartPage.getCartItems().should('have.length', 2)
     
     
     })  
