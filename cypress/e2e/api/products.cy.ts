@@ -20,6 +20,18 @@ it('Debería mostrar solo los productos que definimos en el stub', () => {
 })
 
 // Verificar que el primer producto se llama 'Sauce Labs Backpack'
+cy.get('.inventory_item_name').first()
+    .should('contain.text', 'Sauce Labs Backpack')
+    
+// Intercepta el POST de add-to-cart
+cy.intercept('POST', '**/add-to-cart', {
+    }).as('addToCart')
 
+// Agrega el producto 'Sauce Labs Backpack' al carrito
+cy.get('.inventory_item').first().find('button').click()
 
+// Verifique que el request body contiene el productId correcto
+cy.wait('@addToCart').then((interception) => {
+    expect(interception.request.body).to.have.property('productId', 1)
 
+})
