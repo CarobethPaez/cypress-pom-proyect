@@ -12,5 +12,3 @@
     "cy:run:firefox": "cypress run --browser firefox"
   }
 }
-
-
