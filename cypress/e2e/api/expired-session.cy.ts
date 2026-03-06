@@ -16,9 +16,14 @@ cy.intercept('GET', '**/api/v1/products', {
 
 // Verifica que la app redirige al usuario al login
 cy.visit('/')
+cy.get('#user-name').type('standard_user')
+cy.get('#password').type('secret_sauce')
+cy.get('#login-button').click()
 cy.wait('@login')
+
 cy.visit('/inventory')
 cy.wait('@getProducts')
+
 cy.url().should('include', '/login')
 
 // Verifica que aparece el mensaje "Session expired, please login again"
