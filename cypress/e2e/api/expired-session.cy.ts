@@ -15,6 +15,8 @@ cy.intercept('GET', '**/api/v1/products', {
 }).as('getProducts')    
 
 // Verifica que la app redirige al usuario al login
+cy.visit('/')
+cy.wait('@login')
 cy.visit('/inventory')
 cy.wait('@getProducts')
 cy.url().should('include', '/login')
