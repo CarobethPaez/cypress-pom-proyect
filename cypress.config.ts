@@ -17,6 +17,10 @@ export default defineConfig({
     
     // Carpeta donde están los tests
     specPattern: 'cypress/e2e/**/*.cy.{js,ts}',
+
+    excludeSpecPattern: [
+      'cypress/e2e/api/**/*.cy.ts'
+    ],
     
     // Carpeta donde se guardan screenshots automáticos cuando falla un test
     screenshotsFolder: 'cypress/reports/screenshots',
@@ -33,3 +37,10 @@ export default defineConfig({
     },
   },
 })
+
+
+
+
+
+
+
