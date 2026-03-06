@@ -1,7 +1,7 @@
 describe(' Spy - POST Login API', () => {
     it('Debería hacer login correctamente y verificar la respuesta', () => {
         // Configurar el spy para la llamada de login
-        cy.intercept('POST', '/api/login').as('loginRequest')
+        cy.intercept('POST', '**/api/login').as('loginRequest')
 
         // Realizar el login
         cy.visit('/')
