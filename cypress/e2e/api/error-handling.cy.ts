@@ -45,18 +45,17 @@ it('Debería mostrar mensaje de error cuando no hay conexión', () => {
 
     cy.visit('/inventory')
     
-    cy.get('. network-error-message')
+    cy.get('.network-error-message')
     .should('be.visible')
-    .and('contain.text', 'Network error. Please check your connection and try again.'
-
-    )
+    .and('contain.text', 'Network error. Please check your connection and try again.')
+    })
 
     // Timeout — respuesta lenta
     it('Debería mostrar mensaje de timeout cuando la respuesta es muy lenta', () => {   
         cy.intercept('GET', '**/products', (req) => {
             req.on('response', (res) => {
                 res.setDelay(10000)  // Simula una respuesta muy lenta (10 segundos)
-            }
+            })
         }).as('timeoutRequest')
 
         cy.visit('/inventory')
@@ -69,4 +68,4 @@ it('Debería mostrar mensaje de error cuando no hay conexión', () => {
 })
 
 
-})
+
