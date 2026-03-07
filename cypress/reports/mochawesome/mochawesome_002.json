@@ -1,0 +1,107 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-03-07T20:06:43.012Z",
+    "end": "2026-03-07T20:06:52.655Z",
+    "duration": 9643,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "08f20053-c7b2-47b7-a5ac-5c1558ac52fe",
+      "title": "",
+      "fullFile": "cypress\\e2e\\auth\\users.cy.ts",
+      "file": "cypress\\e2e\\auth\\users.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "9b5d34c7-78fc-49af-af4e-50a3d6100f40",
+          "title": "Login parametrizado con todos los usuarios",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Debería verificar el comportamiento de cada usuario",
+              "fullTitle": "Login parametrizado con todos los usuarios Debería verificar el comportamiento de cada usuario",
+              "timedOut": null,
+              "duration": 9540,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('users').then(function (users) {\n    // Object.entries convierte el objeto JSON en un array iterable\n    Object.entries(users).forEach(function (_a) {\n        var _b = __read(_a, 2), key = _b[0], user = _b[1];\n        cy.log(\"Probando login con usuario: \".concat(key));\n        LoginPage_1.loginPage.visit();\n        LoginPage_1.loginPage.login(user.username, user.password);\n        // Verificar el resultado esperado para cada usuario\n        if (key === 'validUser') {\n            InventoryPage_1.inventoryPage.verifyPageIsLoaded();\n        }\n        else if (key === 'lockedUser') {\n            LoginPage_1.loginPage.verifyErrorMessage('Sorry, this user has been locked out');\n        }\n        else if (key === 'problemUser') {\n            InventoryPage_1.inventoryPage.verifyPageIsLoaded();\n        }\n        else if (key === 'invalidUser') {\n            LoginPage_1.loginPage.verifyErrorMessage('Username and password do not match any user in this service');\n        }\n        else {\n            // Caso no esperado — falla el test con un mensaje claro\n            throw new Error(\"User unknown in fixture: \".concat(key));\n        }\n    });\n});",
+              "err": {},
+              "uuid": "759aebe7-f3a8-4bda-9795-0e0da89aa786",
+              "parentUUID": "9b5d34c7-78fc-49af-af4e-50a3d6100f40",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "759aebe7-f3a8-4bda-9795-0e0da89aa786"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 9540,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mochawesome",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "embeddedScreenshots": true,
+        "inlineAssets": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}

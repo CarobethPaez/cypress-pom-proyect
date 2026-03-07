@@ -11,17 +11,15 @@
     "cy:run:firefox": "cypress run --browser firefox",
     "report:merge": "mochawesome-merge cypress/reports/mochawesome/*.json > cypress/reports/mochawesome/report.json",
     "report:generate": "marge cypress/reports/mochawesome/report.json --reportDir cypress/reports/mochawesome --inline",
-    "report:clean": "rm -rf cypress/reports/mochawesome",
+    "report:clean": "rimraf cypress/reports/mochawesome",
     "test:report": "npm run report:clean && npm run cy:run && npm run report:merge && npm run report:generate"
-    
   },
   "devDependencies": {
     "cypress": "^15.11.0",
     "mochawesome": "^7.1.4",
     "mochawesome-merge": "^5.1.1",
     "mochawesome-report-generator": "^6.3.2",
+    "rimraf": "^6.1.3",
     "typescript": "^5.9.3"
   }
-
-  
 }
