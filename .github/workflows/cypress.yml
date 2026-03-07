@@ -5,7 +5,9 @@ on:
     branches: [main, develop]
   pull_request:
     branches: [main]
-
+  schedule:
+    - cron:
+        '0 11 * * 1-5' # Every weekday at 11:00 UTC
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
