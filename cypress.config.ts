@@ -1,4 +1,3 @@
-// cypress.config.ts
 // Este archivo es el cerebro de la configuración de Cypress
 
 import { defineConfig } from 'cypress'
@@ -30,6 +29,16 @@ export default defineConfig({
     
     // Grabar video de cada test (útil para debugging)
     video: true,
+
+    reporter: 'mochawesome',
+    reporterOptions: {
+      reportDir: 'cypress/reports/mochawesome',
+      overwrite: false,
+      html: false,
+      json: true,
+      embeddedScreenshots: true,
+      inlineAssets: true,
+    },
     
     setupNodeEvents(on, config) {
       // Aquí se configuran plugins adicionales
