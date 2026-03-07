@@ -1,66 +1,53 @@
-# Pipeline básico que corre los tests de Cypress en cada push
-
 name: Cypress E2E Tests
 
 on:
- push:
+  push:
     branches: [main, develop]
- pull_request:
+  pull_request:
     branches: [main]
 
 jobs:
- cypress-run:
-    runs-on: ubuntu-latest         # máquina Linux gratuita de GitHub
+  cypress-run:
+    runs-on: ubuntu-latest
 
     steps:
-      # PASO 1: Descargar el código del repositorio
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # PASO 2: Instalar Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'       # versión de Node
-          cache: 'npm'             # cachear node_modules para ser más rápido
+          node-version: '18'
+          cache: 'npm'
 
-      # PASO 3: Instalar dependencias
       - name: Install dependencies
-        run: npm ci                # más rápido y seguro que npm install en CI
+        run: npm ci
 
-      # PASO 4: Correr los tests de Cypress
+      - name: Print Cypress version
+        run: npx cypress --version
+
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
-          browser: chrome          # navegador a usar
+          browser: chrome
+          spec: 'cypress/e2e/auth/*.cy.ts'
+        env:
+          CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }}
+          CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
+          CYPRESS_BASE_URL: ${{ secrets.BASE_URL }}
 
-      # PASO 5: Guardar screenshots si algo falla
       - name: Upload screenshots on failure
         uses: actions/upload-artifact@v4
-        if: failure()              # solo sube si el pipeline falla
+        if: failure()
         with:
           name: cypress-screenshots
           path: cypress/reports/screenshots
-          retention-days: 7        # guardar por 7 días
+          retention-days: 7
 
-      # PASO 6: Solo correr tests de auth
-      - name: Run only auth tests
-        uses: cypress-io/github-action@v6
-        with:
-          browser: chrome
-          spec: 'cypress/e2e/auth/*.cy.ts'  # solo correr tests de auth
-
-      # Paso 7: Guardar siempre videos de los tests
-      - name: Upload videos on failure
+      - name: Upload videos
         uses: actions/upload-artifact@v4
-        if: always()             
+        if: always()
         with:
           name: cypress-videos
           path: cypress/reports/videos
           retention-days: 3
-
-      # Paso 8: Imprime version de Cypress antes de correr tests
-      - name: Print Cypress version
-        run: npx cypress --version  
-        
-
