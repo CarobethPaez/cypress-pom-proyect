@@ -42,3 +42,25 @@ jobs:
           name: cypress-screenshots
           path: cypress/reports/screenshots
           retention-days: 7        # guardar por 7 días
+
+      # PASO 6: Solo correr tests de auth
+      - name: Run only auth tests
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          spec: 'cypress/e2e/auth/*.cy.ts'  # solo correr tests de auth
+
+      # Paso 7: Guardar siempre videos de los tests
+      - name: Upload videos on failure
+        uses: actions/upload-artifact@v4
+        if: always()             
+        with:
+          name: cypress-videos
+          path: cypress/reports/videos
+          retention-days: 3
+
+      # Paso 8: Imprime version de Cypress antes de correr tests
+      - name: Print Cypress version
+        run: npx cypress --version  
+        
+
