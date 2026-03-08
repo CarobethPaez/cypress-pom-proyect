@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Cypress reports generados automáticamente
+cypress/reports/mochawesome/
+cypress/reports/videos/
+cypress/reports/screenshots/
+
+# Logs
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
