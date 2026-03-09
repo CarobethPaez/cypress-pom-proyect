@@ -21,18 +21,15 @@ describe('Login Feature', () => {
   context('Happy Path — Login exitoso', () => {
     
     it('Debería hacer login con credenciales válidas', () => {
-      // Arrange (Preparar) — datos del test
-      const validUser = 'standard_user'
-      const validPassword = 'secret_sauce'
-
-      // Act (Actuar) — ejecutar la acción
-      loginPage.login(validUser, validPassword)
-
-      // Assert (Verificar) — comprobar el resultado
+      it('Debería hacer login con credenciales válidas', () => {
+      loginPage.visit()
+      loginPage.login('standard_user', 'secret_sauce') // ← revertir
       inventoryPage.verifyPageIsLoaded()
-    })
+})
+      
+})
 
-    it('Debería mostrar los productos después del login', () => {
+     it('Debería mostrar los productos después del login', () => {
       loginPage.login('standard_user', 'secret_sauce')
       
       // Verificar que hay productos visibles

@@ -9,7 +9,7 @@
     "cy:run:headed": "cypress run --headed",
     "cy:run:chrome": "cypress run --browser chrome",
     "cy:run:firefox": "cypress run --browser firefox",
-    "report:generate": "marge cypress/reports/mochawesome/report.json --reportDir cypress/reports/mochawesome --inline --reportFilename report",
+    "report:generate": "node scripts/merge-reports.js",
     "report:merge": "npx mochawesome-merge \"cypress/reports/mochawesome/mochawesome*.json\" -o cypress/reports/mochawesome/report.json",
     "report:clean": "rimraf cypress/reports/mochawesome",
     "test:report": "npm run report:clean && npm run cy:run && npm run report:merge && npm run report:generate"
