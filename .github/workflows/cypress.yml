@@ -53,3 +53,22 @@ jobs:
           name: cypress-videos
           path: cypress/reports/videos
           retention-days: 3
+
+      # Merge de reportes JSON
+      - name: Merge test reports
+        if: always()
+        run: npx mochawesome-merge "cypress/reports/mochawesome/mochawesome*.json" -o cypress/reports/mochawesome/report.json
+
+      # Generar reporte HTML
+      - name: Generate HTML report
+        if: always()
+        run: npm run report:generate
+
+# Subir reporte como artifact
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-report
+          path: cypress/reports/mochawesome/report.html
+          retention-days: 30
