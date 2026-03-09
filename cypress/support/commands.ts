@@ -1,19 +1,3 @@
-
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
 // Declaración de tipos para TypeScript
 declare global {
   namespace Cypress {
@@ -36,10 +20,6 @@ declare global {
   }
 }
 
-// ============================================================
-// COMANDO: cy.login() 
-// Uso: cy.login('standard_user', 'secret_sauce')
-// ============================================================
 Cypress.Commands.add('login', (username: string, password: string) => {
   // En vez de hacer login por la UI (lento), usamos la API directamente
   // Esto hace los tests MÁS RÁPIDOS y más estables
