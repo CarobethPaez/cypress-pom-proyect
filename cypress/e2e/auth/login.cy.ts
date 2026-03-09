@@ -23,7 +23,7 @@ describe('Login Feature', () => {
     it('Debería hacer login con credenciales válidas', () => {
       it('Debería hacer login con credenciales válidas', () => {
       loginPage.visit()
-      loginPage.login('standard_user', 'secret_sauce') // ← revertir
+      loginPage.login('standard_user', 'secret_sauce') 
       inventoryPage.verifyPageIsLoaded()
 })
       
