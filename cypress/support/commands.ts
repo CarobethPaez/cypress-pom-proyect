@@ -1,14 +1,4 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
+
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 //
@@ -34,10 +24,6 @@ declare global {
 }
 
 export {}
-
-// cypress/support/commands.ts
-// Comandos personalizados — disponibles en TODOS los tests
-
 // Declaración de tipos (TypeScript requiere esto para autocompletado)
 declare global {
   namespace Cypress {
@@ -45,6 +31,7 @@ declare global {
       login(username: string, password: string): Chainable<void>
       loginAsStandardUser(): Chainable<void>
       addProductToCart(productName: string): Chainable<void>
+      loginBySession(username: string, password: string): Chainable<void>
     }
   }
 }
@@ -80,4 +67,14 @@ Cypress.Commands.add('loginAsStandardUser', () => {
 // ============================================================
 Cypress.Commands.add('addProductToCart', (productName: string) => {
   cy.get(`[data-test="add-to-cart-${productName}"]`).click()
+})
+
+Cypress.Commands.add('loginBySession', (username: string, password: string) => {
+  cy.session([username, password], () => {
+    cy.visit('/')
+    cy.get('[data-test="username"]').type(username)
+    cy.get('[data-test="password"]').type(password)
+    cy.get('[data-test="login-button"]').click()
+    cy.url().should('include', '/inventory')
+  })
 })
